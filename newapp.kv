@@ -1,0 +1,491 @@
+
+<ScreenManager>:
+    WelcomeScreen:
+    HomeScreen:
+    LoginScreen:
+    SignUpScreen:
+    MainScreen:
+    InfoTable:
+    CodeTable:
+    MusicScreen:
+    MapScreen:
+    PopupScreen:
+
+
+
+<WelcomeScreen>:
+    name : 'welcomescreen'
+    MDBoxLayout:
+        #md_bg_color: 0, 0, 0, 1
+        #line_color: 0, 0, 0, 2
+
+        # Adding image from the system
+        FitImage:
+            source: 'Image/splash.png'
+
+            # Giving the pos of image
+            pos_hint: {'center_x':0.5,"center_y":0.5}
+
+            # allow stretching of image
+            allow_stretch: True
+
+
+<HomeScreen>:
+    name : 'homescreen'
+    FitImage:
+        source: 'Image/Theme(2).png'
+
+        # Giving the pos of image
+        pos_hint: {'center_x':0.5,"center_y":0.5}
+
+        # allow stretching of image
+        allow_stretch: True
+
+
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: 20
+
+        MDToolbar:
+            title: "Home"
+            elevation: "20sp"
+
+        MDCard:
+            size_hint: None, None
+            size: "250dp", "200dp"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_release: root.manager.current = 'mainscreen'
+            Image:
+                source: 'Image/1_trusted_caller_id_app.png'
+
+                # Giving the size of image
+                size_hint: None,None
+                size: "250dp", "250dp"
+                pos_hint: {'center_x':0.5,"center_y":0.5}
+
+                # allow stretching of image
+        MDLabel:
+            text:'Phone Number Information'
+            font_name: "Poppins-Black.ttf"
+            font_size : "30sp"
+            halign: 'center'
+            pos_hint : {'center_y':0.75}
+
+        MDCard:
+            size_hint: None, None
+            size: "250dp", "200dp"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_release:root.manager.current = 'musicscreen'
+            FitImage:
+                source: 'Image/final_5d1a76214bc82f00133c2e6a_500831-removebg-preview(1).png'
+
+                # Giving the pos of image
+                pos_hint: {'center_x':0.5,"center_y":0.5}
+
+                # allow stretching of image
+                allow_stretch: True
+        MDLabel:
+            text:'Youtube Song Downloader'
+            font_name: "Poppins-Black.ttf"
+            font_size : "30sp"
+            halign: 'center'
+            pos_hint : {'center_y':0.75}
+
+        MDFloatingActionButtonSpeedDial:
+            data: app.data
+            root_button_anim: True
+            callback: app.callback
+
+<SignUpScreen>:
+
+    name: 'signupscreen'
+
+    Image:
+        source: 'Image/Theme(1).png'
+
+        # Giving the size of image
+        size_hint: None,None
+        size: "420dp", "320dp"
+        pos_hint: {'center_x':0.5,"center_y":0.85}
+
+        # allow stretching of image
+        allow_stretch: True
+
+
+    MDFloatingActionButton:
+        icon: 'login-variant'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.12, 'center_y':0.08}
+        user_font_size : '30sp'
+        on_press:
+            root.manager.current = 'loginscreen'
+            root.manager.transition.direction = 'right'
+            app.clearentry()
+            app.disbutton()
+
+    MDFloatingActionButton:
+        id:disabled_button
+        disabled: True
+        icon: 'arrow-right'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.88, 'center_y':0.08}
+        user_font_size : '30sp'
+        on_press:
+            root.manager.current = 'loginscreen'
+            root.manager.transition.direction = 'left'
+
+
+    MDLabel:
+        text:'SignUp'
+        font_name: "Poppins-Black.ttf"
+        font_size : "40sp"
+        halign: 'center'
+        pos_hint : {'center_y':0.75}
+
+    MDTextField:
+        id:username_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.65}
+        size_hint: (0.8,0.1)
+        hint_text : 'Username'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'account'
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+
+    MDTextField:
+        id:password_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.45}
+        size_hint: (0.8,0.1)
+        hint_text : 'Password'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'eye-off'
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+        password : True
+
+    MDTextField:
+        id:repassword_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.35}
+        size_hint: (0.8,0.1)
+        hint_text : 'Re-Password'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'eye-off'
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+        password : True
+
+
+    MDTextField:
+        id:email_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.55}
+        size_hint: (0.8,0.1)
+        hint_text : 'Email'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'email'
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+
+
+    MDFloatingActionButton:
+        icon:'account-check'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.5, 'center_y':0.24}
+        user_font_size: '30sp'
+        on_press:
+            app.check_signup()
+
+    MDTextButton:
+        text : "I agree to Terms & Conditions"
+        font_size : "12sp"
+        pos_hint: {'center_x':0.5, 'center_y':0.16}
+
+
+<LoginScreen>:
+
+    name: 'loginscreen'
+
+    Image:
+        source: 'Image/Theme.png'
+
+        # Giving the size of image
+        size_hint: None,None
+        size: "420dp", "320dp"
+        pos_hint: {'center_x':0.5,"center_y":0.9}
+
+        # allow stretching of image
+        allow_stretch: True
+
+
+    MDLabel:
+        id: login_up
+        text:'Welcome\nto Application'
+        font_name: "Poppins-Black.ttf"
+        font_size : "35sp"
+        halign: 'center'
+        pos_hint: {'center_y':0.7}
+
+    MDFloatingActionButton:
+        icon: 'account-plus'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.12, 'center_y':0.08}
+        user_font_size : '30sp'
+        on_press:
+            root.manager.current = 'signupscreen'
+            root.manager.transition.direction = 'right'
+
+    MDFloatingActionButton:
+        icon:'account-check'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.5, 'center_y':0.25}
+        user_font_size: '30sp'
+        on_press: app.check_login()
+
+    MDTextButton:
+        text : "Forgot Password?"
+        pos_hint: {'center_x':0.5, 'center_y':0.18}
+
+    MDFloatingActionButton:
+        id:disabled_button
+        disabled: True
+        icon: 'arrow-right'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.88, 'center_y':0.08}
+        user_font_size : '30sp'
+        on_press:
+            root.manager.current = 'homescreen'
+            root.manager.transition.direction = 'left'
+
+    MDTextField:
+        id:logpassword_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        size_hint: (0.8,0.1)
+        hint_text : 'Password'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'eye-off'
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+        password : True
+
+    MDTextField:
+        id:logemail_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.5}
+        size_hint: (0.8,0.1)
+        hint_text : 'Email'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'email'
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+
+<MainScreen>:
+    name : 'mainscreen'
+
+    Image:
+        source: 'Image/splash(3).png'
+
+        # Giving the size of image
+        size_hint: None,None
+        size: "420dp", "320dp"
+        pos_hint: {'center_x':0.5,"center_y":0.8}
+
+        # allow stretching of image
+        allow_stretch: True
+
+    MDLabel:
+        id:profile_name
+        text:'Get information about your phone number'
+        font_name: "Poppins-Black.ttf"
+        font_size : "28sp"
+        halign : 'center'
+        pos_hint : {'center_y':0.6}
+
+
+    MDTextField:
+        id:number_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        size_hint: (0.8,0.1)
+        input_filter : "int"
+        hint_text : 'Enter Phone Number'
+        helper_text: 'Required'
+        helper_text_mode: 'on_error'
+        icon_right: 'cellphone'
+        multiline: False
+        icon_right_color: app.theme_cls.primary_color
+        #required : True
+
+    MDFloatingActionButton:
+        id: third_disabled
+        disabled: True
+        icon:'arrow-right'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.88, 'center_y':0.08}
+        user_font_size: '30sp'
+        on_press:
+            root.manager.current = 'infotable'
+            app.find_info()
+
+    MDFloatingActionButton:
+        icon:'arrow-left'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.12, 'center_y':0.08}
+        user_font_size: '30sp'
+        on_press:
+            root.manager.current = 'homescreen'
+
+    MDFloatingActionButton:
+        icon:'account-check'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.5, 'center_y':0.25}
+        user_font_size: '30sp'
+        on_press:
+            app.check_number()
+
+
+
+<InfoTable>:
+    name: 'infotable'
+
+    MDLabel:
+        text:'Information'
+        font_name: "Poppins-Black.ttf"
+        font_size : "35sp"
+        halign: 'center'
+        pos_hint: {'center_y':0.9}
+
+    MDRoundFlatButton:
+        text: "USSD CODE"
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.3, 'center_y':0.2}
+        on_press:
+            root.manager.current = 'codetable'
+    MDRoundFlatButton:
+        text: "Location"
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.7, 'center_y':0.2}
+        on_press:
+            root.manager.current = 'mapscreen'
+
+    MDFloatingActionButton:
+        icon:'arrow-left'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.12, 'center_y':0.08}
+        user_font_size: '30sp'
+        on_press:
+            root.manager.current = 'mainscreen'
+
+<CodeTable>:
+    name : 'codetable'
+
+    MDLabel:
+        text:'Your Provider USSD Code'
+        font_name: "Poppins-Black.ttf"
+        font_size : "30sp"
+        halign: 'center'
+        pos_hint: {'center_y':0.9}
+
+    MDFloatingActionButton:
+        icon:'arrow-left'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.12, 'center_y':0.08}
+        user_font_size: '30sp'
+        on_press:
+            root.manager.current = 'infotable'
+
+<MusicScreen>:
+    name : "musicscreen"
+    id : "musicscreen"
+    Image:
+        source: 'Image/splash(3).png'
+
+        # Giving the size of image
+        size_hint: None,None
+        size: "420dp", "320dp"
+        pos_hint: {'center_x':0.5,"center_y":0.8}
+
+        # allow stretching of image
+        allow_stretch: True
+
+    MDLabel:
+        text:'Download Youtube Songs'
+        font_name: "Poppins-Black.ttf"
+        font_size : "35sp"
+        halign: 'center'
+        pos_hint: {'center_y':0.6}
+
+    MDTextField:
+        id:link_text_fied
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        size_hint: (0.8,0.1)
+        hint_text : 'Paste the youtube song link'
+        icon_right: 'youtube'
+        icon_right_color: app.theme_cls.primary_color
+
+
+    MDRaisedButton:
+        id : "download"
+        text : "Download"
+        pos_hint: {"center_x": .5, "center_y": .25}
+        on_press:
+            app.downloadsong()
+
+    MDFloatingActionButton:
+        icon:'arrow-left'
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {'center_x':0.12, 'center_y':0.08}
+        user_font_size: '30sp'
+        on_press:
+            root.manager.current = 'homescreen'
+
+<MapScreen>:
+    name : "mapscreen"
+    id : "mapscreen"
+
+
+<PopupScreen>:
+    name : "popup"
+    Image:
+        source: 'Image/splash(3).png'
+
+        # Giving the size of image
+        size_hint: None,None
+        size: "420dp", "320dp"
+        pos_hint: {'center_x':0.5,"center_y":0.8}
+
+        # allow stretching of image
+        allow_stretch: True
+
+    MDLabel:
+        text: "Downloading...."
+        size_hint: 0.6, 0.2
+        font_name: "Poppins-Black.ttf"
+        font_size : "30sp"
+        halign: 'center'
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+    MDProgressBar:
+        id : download_progress_bar
+        md_bg_color:app.theme_cls.primary_color
+        pos_hint: {"center_x": 0.5, "center_y": 0.4}
+        size_hint_x: .8
+
+    MDRaisedButton:
+        text: "Close"
+        md_bg_color:app.theme_cls.primary_color
+        size_hint: 0.5, 0.05
+        pos_hint: {"center_x": 0.5, "center_y": 0.2}
+        on_release: app.back_home()
+
+
+
+
+
+
+
+
+
