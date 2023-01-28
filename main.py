@@ -1070,36 +1070,6 @@ class NewApp(MDApp):
                     # extract only audio
                     video = yt.streams.filter(only_audio=True).first()
                     destination = download_dir_path
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     # download the file
                     out_file = video.download(output_path=destination)
                     print(yt.title, '~ viewed', yt.views,'times.')
