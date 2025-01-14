@@ -2,7 +2,7 @@ Here’s the **README.md** :
 
 ---
 
-# Trigger  
+# Trigger - Android Application
 
 ### Overview  
 **Trigger** is an Android application developed using Python with the **Kivy** and **KivyMD** frameworks. The app offers functionalities such as retrieving phone number information via USSD codes, determining the phone's geographical location, and downloading songs from YouTube links.  
